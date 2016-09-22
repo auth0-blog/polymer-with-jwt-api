@@ -10,6 +10,7 @@
     "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.0",
     "iron-icon": "PolymerElements/iron-icon#^1.0.0",
     "iron-iconset-svg": "PolymerElements/iron-iconset-svg#^1.0.0",
+	"iron-input": "PolymerElements/iron-input#^1.0.10",
     "iron-localstorage": "PolymerElements/iron-localstorage#^1.0.0",
     "iron-media-query": "PolymerElements/iron-media-query#^1.0.0",
     "iron-pages": "PolymerElements/iron-pages#^1.0.0",
