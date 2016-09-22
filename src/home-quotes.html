@@ -1,0 +1,37 @@
+<dom-module id="home-quotes">
+	<template>
+		<style include="shared-styles">
+			:host {
+				display: block;
+				padding: 10px;
+			}
+		</style>
+
+		<iron-ajax
+			 id="getQuoteAjax"
+			 auto 
+			 url="http://localhost:3001/api/random-quote"
+			 method="get"
+			 handle-as="text"
+			 last-response="{{quote}}"></iron-ajax>
+		
+		<div class="card">
+			<h2>Quotes</h2>
+			<blockquote>[[quote]]</blockquote>
+			<paper-button class="primary" raised on-tap="getQuote">Get a New Quote</paper-button>
+		</div>
+		
+	</template>
+
+	<script>
+		(function() {
+			Polymer({
+				is: 'home-quotes',
+				
+				getQuote: function() {
+					this.$.getQuoteAjax.generateRequest();
+				}
+			});
+		}());
+	</script>
+</dom-module>
