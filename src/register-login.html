@@ -25,6 +25,14 @@
 			paper-button.link {
 				color: #757575;
 			}
+			.alert-error {
+				background: #ffcdd2;
+				border: 1px solid #f44336;
+				border-radius: 3px;
+				color: #333;
+				font-size: 14px;
+				padding: 10px;
+			}
 		</style>
 
 		<app-location route="{{route}}"></app-location>
@@ -42,7 +50,7 @@
 
 		<div class="card">
 			<div id="unauthenticated" hidden$="[[storedUser.loggedin]]">
-				<h2>Log In</h2>
+				<h1>Log In</h1>
 
 				<p><strong>Log in</strong> or <strong>sign up</strong> to access secret Chuck Norris quotes!</p>
 

@@ -21,7 +21,7 @@
 			 last-response="{{quote}}"></iron-ajax>
 		
 		<div class="card">
-			<h2>Quotes</h2>
+			<h1>Quotes</h1>
 			<blockquote>[[quote]]</blockquote>
 			<paper-button class="primary" raised on-tap="getQuote">Get a New Quote</paper-button>
 		</div>
@@ -32,7 +32,7 @@
 		(function() {
 			Polymer({
 				is: 'home-quotes',
-				
+
 				getQuote: function() {
 					this.$.getQuoteAjax.generateRequest();
 				}
