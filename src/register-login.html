@@ -1,6 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/app-route/app-location.html">
-<link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/iron-localstorage/iron-localstorage.html">
 <link rel="import" href="../bower_components/iron-input/iron-input.html">
@@ -118,11 +117,11 @@
 
 					if (response.id_token) {
 						this.error = '';
-						this.set('storedUser', {
+						this.storedUser = {
 							name: this.formData.username,
 							token: response.id_token,
 							loggedin: true
-						});
+						};
 
 						// redirect to Secret Quotes
 						this.set('route.path', '/secret-quotes');
