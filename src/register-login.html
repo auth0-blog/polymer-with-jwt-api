@@ -91,7 +91,7 @@
 				properties: {
 					formData: {
 						type: Object,
-						value: { username: '', password: '' }
+						value: {}
 					},
 					storedUser: Object,
 					error: String
@@ -129,10 +129,7 @@
 					}
 
 					// reset form data
-					this.formData = {
-						username: '',
-						password: ''
-					};
+					this.formData = {};
 				},
 
 				handleUserError: function(event) {
