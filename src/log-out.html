@@ -1,5 +1,4 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/iron-localstorage/iron-localstorage.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="app-data.html">
 
@@ -22,7 +21,6 @@
 			}
 		</style>
 
-		<iron-localstorage name="user-storage" value="{{storedUser}}"></iron-localstorage>
 		<app-data key="userData" data="{{storedUser}}"></app-data>
 
 		<template is="dom-if" if="{{!link}}">
@@ -49,7 +47,7 @@
 
 				logout: function() {
 					// remove user data
-					this.set('storedUser', null);
+					this.storedUser = null;
 				}
 			});
 		}());
