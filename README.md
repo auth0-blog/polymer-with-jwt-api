@@ -1,6 +1,6 @@
 # Build a Polymer App - From Authentication to Calling an API
 
-Build your first Polymer web app. Call an API and authenticate with [JSON Web Tokens](http://jwt.io) and local storage.
+Build your first Polymer web app. Call an API and authenticate with [JSON Web Tokens](http://jwt.io) and local storage. Read the full tutorial here: [Build Your First App with Polymer and Web Components](https://auth0.com/blog/build-your-first-app-with-polymer-and-web-components/).
 
 ## Dependencies
 
