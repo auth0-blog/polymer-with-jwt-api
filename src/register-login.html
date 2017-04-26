@@ -9,132 +9,133 @@
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="register-login">
-	<template>
-		<style include="shared-styles">
-			:host {
-				display: block;
-				padding: 10px;
-			}
-			.wrapper-btns {
-				margin-top: 15px;
-			}
-			a {
-				color: var(--primary-color);
-			}
-			paper-button.link {
-				color: #757575;
-			}
-			.alert-error {
-				background: #ffcdd2;
-				border: 1px solid #f44336;
-				border-radius: 3px;
-				color: #333;
-				font-size: 14px;
-				padding: 10px;
-			}
-		</style>
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+      }
+      .wrapper-btns {
+        margin-top: 15px;
+      }
+      a {
+        color: var(--primary-color);
+      }
+      paper-button.link {
+        color: #757575;
+      }
+      .alert-error {
+        background: #ffcdd2;
+        border: 1px solid #f44336;
+        border-radius: 3px;
+        color: #333;
+        font-size: 14px;
+        padding: 10px;
+      }
+    </style>
 
-		<app-location route="{{route}}"></app-location>
+    <app-location route="{{route}}"></app-location>
 
-		<iron-localstorage name="user-storage" value="{{storedUser}}"></iron-localstorage>
-		<app-data key="userData" data="{{storedUser}}"></app-data>
+    <iron-localstorage name="user-storage" value="{{storedUser}}"></iron-localstorage>
+    <app-data key="userData" data="{{storedUser}}"></app-data>
 
-		<iron-ajax
-			id="registerLoginAjax"
-			method="post"
-			content-type="application/json"
-			handle-as="text"
-			on-response="handleUserResponse"
-			on-error="handleUserError"></iron-ajax>
+    <iron-ajax
+      id="registerLoginAjax"
+      method="post"
+      content-type="application/json"
+      handle-as="text"
+      on-response="handleUserResponse"
+      on-error="handleUserError"></iron-ajax>
 
-		<div class="card">
-			<div id="unauthenticated" hidden$="[[storedUser.loggedin]]">
-				<h1>Log In</h1>
+    <div class="card">
+      <div id="unauthenticated" hidden$="[[storedUser.loggedin]]">
+        <h1>Log In</h1>
 
-				<p><strong>Log in</strong> or <strong>sign up</strong> to access secret Chuck Norris quotes!</p>
+        <p><strong>Log in</strong> or <strong>sign up</strong> to access secret Chuck Norris quotes!</p>
 
-				<template is="dom-if" if="[[error]]">
-					<p class="alert-error"><strong>Error:</strong> [[error]]</p>
-				</template>
-				
-				<paper-input-container>
-					<label>Username</label>
-					<input is="iron-input" id="username" type="text" bind-value="{{formData.username}}">
-				</paper-input-container>
+        <template is="dom-if" if="[[error]]">
+          <p class="alert-error"><strong>Error:</strong> [[error]]</p>
+        </template>
+        
+        <paper-input-container>
+          <label>Username</label>
+          <input is="iron-input" id="username" type="text" bind-value="{{formData.username}}">
+        </paper-input-container>
 
-				<paper-input-container>
-					<label>Password</label>
-					<input is="iron-input" id="password" type="password" bind-value="{{formData.password}}">
-				</paper-input-container>
+        <paper-input-container>
+          <label>Password</label>
+          <input is="iron-input" id="password" type="password" bind-value="{{formData.password}}">
+        </paper-input-container>
 
-				<div class="wrapper-btns">
-					<paper-button raised class="primary" on-tap="postLogin">Log In</paper-button>
-					<paper-button class="link" on-tap="postRegister">Sign Up</paper-button>
-				</div>
-			</div>	
+        <div class="wrapper-btns">
+          <paper-button raised class="primary" on-tap="postLogin">Log In</paper-button>
+          <paper-button class="link" on-tap="postRegister">Sign Up</paper-button>
+        </div>
+      </div>	
 
-			<div id="authenticated" hidden$="[[!storedUser.loggedin]]">
-				<h2>Hello, [[storedUser.name]]!</h2>
-				<p>You are currently logged in. You can access <a href="/secret-quotes">Secret Quotes</a>!</p>
-				<log-out stored-user="{{storedUser}}"></log-out>
-			</div>
+      <div id="authenticated" hidden$="[[!storedUser.loggedin]]">
+        <h2>Hello, [[storedUser.name]]!</h2>
+        <p>You are currently logged in. You can access <a href="/secret-quotes">Secret Quotes</a>!</p>
+        <log-out stored-user="{{storedUser}}"></log-out>
+      </div>
 
-		</div>
-	</template>
+    </div>
+  </template>
 
-	<script>
-		(function() {
-			Polymer({
-				is: 'register-login',
+  <script>
+    (function() {
+      Polymer({
+        is: 'register-login',
 
-				properties: {
-					formData: {
-						type: Object,
-						value: {}
-					},
-					storedUser: Object,
-					error: String
-				},
+        properties: {
+          formData: {
+            type: Object,
+            value: {}
+          },
+          storedUser: Object,
+          error: String
+        },
 
-				_setReqBody: function() {
-					this.$.registerLoginAjax.body = this.formData;
-				},
+        _setReqBody: function() {
+          this.$.registerLoginAjax.body = this.formData;
+        },
 
-				postLogin: function() {
-					this.$.registerLoginAjax.url = 'http://localhost:3001/sessions/create';
-					this._setReqBody();
-					this.$.registerLoginAjax.generateRequest();
-				},
+        postLogin: function() {
+          this.$.registerLoginAjax.url = 'http://localhost:3002/sessions/create';
+          this._setReqBody();
+          this.$.registerLoginAjax.generateRequest();
+        },
 
-				postRegister: function() {
-					this.$.registerLoginAjax.url = 'http://localhost:3001/users';
-					this._setReqBody();
-					this.$.registerLoginAjax.generateRequest();
-				},
+        postRegister: function() {
+          this.$.registerLoginAjax.url = 'http://localhost:3002/users';
+          this._setReqBody();
+          this.$.registerLoginAjax.generateRequest();
+        },
 
-				handleUserResponse: function(event) {
-					var response = JSON.parse(event.detail.response);
+        handleUserResponse: function(event) {
+          var response = JSON.parse(event.detail.response);
 
-					if (response.id_token) {
-						this.error = '';
-						this.storedUser = {
-							name: this.formData.username,
-							token: response.id_token,
-							loggedin: true
-						};
+          if (response.id_token) {
+            this.error = '';
+            this.storedUser = {
+              name: this.formData.username,
+              id_token: response.id_token,
+              access_token: response.access_token,
+              loggedin: true
+            };
 
-						// redirect to Secret Quotes
-						this.set('route.path', '/secret-quotes');
-					}
+            // redirect to Secret Quotes
+            this.set('route.path', '/secret-quotes');
+          }
 
-					// reset form data
-					this.formData = {};
-				},
+          // reset form data
+          this.formData = {};
+        },
 
-				handleUserError: function(event) {
-					this.error = event.detail.request.xhr.response;
-				}
-			});
-		}());
-	</script>
+        handleUserError: function(event) {
+          this.error = event.detail.request.xhr.response;
+        }
+      });
+    }());
+  </script>
 </dom-module>
