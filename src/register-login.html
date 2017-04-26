@@ -101,13 +101,13 @@
         },
 
         postLogin: function() {
-          this.$.registerLoginAjax.url = 'http://localhost:3002/sessions/create';
+          this.$.registerLoginAjax.url = 'http://localhost:3001/sessions/create';
           this._setReqBody();
           this.$.registerLoginAjax.generateRequest();
         },
 
         postRegister: function() {
-          this.$.registerLoginAjax.url = 'http://localhost:3002/users';
+          this.$.registerLoginAjax.url = 'http://localhost:3001/users';
           this._setReqBody();
           this.$.registerLoginAjax.generateRequest();
         },
